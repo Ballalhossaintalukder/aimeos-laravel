@@ -94,16 +94,24 @@ class CatalogController extends Controller
 	 */
 	public function listAction()
 	{
-		$params = ['page' => 'page-catalog-list'];
-
-		foreach( app( 'config' )->get( 'shop.page.catalog-list' ) as $name )
+		try
 		{
-			$params['aiheader'][$name] = Shop::get( $name )->header();
-			$params['aibody'][$name] = Shop::get( $name )->body();
-		}
+			$params = ['page' => 'page-catalog-list'];
 
-		return Response::view( Shop::template( 'catalog.list' ), $params )
-			->header( 'Cache-Control', 'private, max-age=' . config( 'shop.cache_maxage', 30 ) );
+			foreach( app( 'config' )->get( 'shop.page.catalog-list' ) as $name )
+			{
+				$params['aiheader'][$name] = Shop::get( $name )->header();
+				$params['aibody'][$name] = Shop::get( $name )->body();
+			}
+
+			return Response::view( Shop::template( 'catalog.list' ), $params )
+				->header( 'Cache-Control', 'private, max-age=' . config( 'shop.cache_maxage', 30 ) );
+		}
+		catch( \Exception $e )
+		{
+			if( $e->getCode() >= 400 && $e->getCode() < 600 ) { abort( $e->getCode() ); }
+			throw $e;
+		}
 	}
 
 
