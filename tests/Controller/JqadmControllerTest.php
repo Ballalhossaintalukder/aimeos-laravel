@@ -100,7 +100,7 @@ class JqadmControllerTest extends AimeosTestAbstract
 		View::addLocation( dirname( __DIR__ ) . '/fixtures/views' );
 		$this->app['session']->setPreviousUrl( 'http://localhost/unittest' );
 
-		$params = ['site' => 'unittest', 'resource' => 'product', 'id' => '0'];
+		$params = ['site' => 'unittest', 'resource' => 'product', 'item' => ['product.code' => 'jqadmSaveTest']];
 		$response = $this->action( 'POST', '\Aimeos\Shop\Controller\JqadmController@saveAction', $params );
 
 		$this->assertEquals( 302, $response->getStatusCode() );
