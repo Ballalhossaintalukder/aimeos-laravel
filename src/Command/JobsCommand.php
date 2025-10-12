@@ -75,7 +75,6 @@ class JobsCommand extends AbstractCommand
 	protected function context() : \Aimeos\MShop\ContextIface
 	{
 		$lv = $this->getLaravel();
-		$aimeos = $lv->make( 'aimeos' )->get();
 		$context = $lv->make( 'aimeos.context' )->get( false, 'command' );
 
 		$langManager = \Aimeos\MShop::create( $context, 'locale/language' );
