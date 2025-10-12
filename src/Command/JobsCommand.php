@@ -78,9 +78,6 @@ class JobsCommand extends AbstractCommand
 		$aimeos = $lv->make( 'aimeos' )->get();
 		$context = $lv->make( 'aimeos.context' )->get( false, 'command' );
 
-		$tmplPaths = $aimeos->getTemplatePaths( 'controller/jobs/templates' );
-		$view = $lv->make( 'aimeos.view' )->create( $context, $tmplPaths );
-
 		$langManager = \Aimeos\MShop::create( $context, 'locale/language' );
 		$langids = $langManager->search( $langManager->filter( true ) )->keys()->toArray();
 		$i18n = $lv->make( 'aimeos.i18n' )->get( $langids );
@@ -89,7 +86,6 @@ class JobsCommand extends AbstractCommand
 		$context->setCache( new \Aimeos\Base\Cache\None() );
 
 		$context->setEditor( 'aimeos:jobs' );
-		$context->setView( $view );
 		$context->setI18n( $i18n );
 
 		return $this->addConfig( $context );

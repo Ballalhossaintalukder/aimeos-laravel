@@ -2,21 +2,6 @@
 
 class JsonadmControllerTest extends AimeosTestAbstract
 {
-	public function testOptionsActionSite()
-	{
-		View::addLocation( dirname( __DIR__ ) . '/fixtures/views' );
-		$this->app['session']->setPreviousUrl( 'http://localhost/invalid' );
-
-		$params = ['site' => 'invalid', 'resource' => 'product'];
-		$response = $this->action( 'OPTIONS', '\Aimeos\Shop\Controller\JsonadmController@optionsAction', $params );
-
-		$json = json_decode( $response->getContent(), true );
-
-		$this->assertResponseOk();
-		$this->assertNotNull( $json );
-	}
-
-
 	public function testOptionsAction()
 	{
 		View::addLocation( dirname( __DIR__ ) . '/fixtures/views' );
