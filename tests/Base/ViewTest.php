@@ -5,15 +5,9 @@ class ViewTest extends AimeosTestAbstract
 {
 	public function testCreateNoLocale()
 	{
-		$config = $this->getMockBuilder( '\Illuminate\Config\Repository' )->getMock();
-
-		$i18n = $this->getMockBuilder( '\Aimeos\Shop\Base\I18n' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$support = $this->getMockBuilder( '\Aimeos\Shop\Base\Support' )
-			->disableOriginalConstructor()
-			->getMock();
+		$config = $this->createStub( '\Illuminate\Config\Repository' );
+		$i18n = $this->createStub( '\Aimeos\Shop\Base\I18n' );
+		$support = $this->createStub( '\Aimeos\Shop\Base\Support' );
 
 		$context = new \Aimeos\MShop\Context();
 		$context->setConfig( new \Aimeos\Base\Config\PHPArray() );
